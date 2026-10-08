@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Wick-Guard</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Tahoma,Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#070912;
+    color:#fff;
+}
+
+/* LOGIN */
+
+#login{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:
+        radial-gradient(circle at 20% 20%,#34208055,transparent 35%),
+        radial-gradient(circle at 80% 80%,#008ca855,transparent 35%),
+        #070912;
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    padding:32px 25px;
+    text-align:center;
+    background:#0d1220;
+    border:1px solid #252d42;
+    border-radius:24px;
+    box-shadow:0 20px 70px #0008;
+}
+
+.logo{
+    width:80px;
+    height:80px;
+    margin:0 auto 18px;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    font-weight:bold;
+    background:linear-gradient(135deg,#7657ff,#00d9ff);
+}
+
+h1{
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#8993a7;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    text-align:right;
+    margin-bottom:8px;
+    color:#b9c2d3;
+    font-size:14px;
+}
+
+input,select{
+    width:100%;
+    padding:14px;
+    color:white;
+    background:#080c15;
+    border:1px solid #293247;
+    border-radius:12px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#7657ff;
+}
+
+button{
+    cursor:pointer;
+}
+
+.login-button{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border:0;
+    border-radius:12px;
+    color:white;
+    font-weight:bold;
+    background:linear-gradient(135deg,#7657ff,#5941d5);
+}
+
+.error{
+    min-height:20px;
+    margin-top:10px;
+    color:#ff526c;
+    font-size:13px;
+}
+
+/* APP */
+
+#app{
+    display:none;
+    min-height:100vh;
+}
+
+header{
+    height:70px;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#080b14ee;
+    border-bottom:1px solid #20283a;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.small-logo{
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:11px;
+    background:linear-gradient(135deg,#7657ff,#00d9ff);
+}
+
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#20283a;
+    font-weight:bold;
+}
+
+.logout{
+    padding:9px 12px;
+    color:white;
+    background:#141a28;
+    border:1px solid #293247;
+    border-radius:9px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:22px;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:20px;
+}
+
+.sidebar{
+    height:max-content;
+    padding:10px;
+    background:#0d1220;
+    border:1px solid #20283a;
+    border-radius:18px;
+}
+
+.nav{
+    width:100%;
+    padding:13px;
+    margin-bottom:5px;
+    text-align:right;
+    color:#aab4c8;
+    background:transparent;
+    border:0;
+    border-radius:10px;
+}
+
+.nav:hover,.nav.active{
+    color:white;
+    background:#171e2e;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.title{
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.desc{
+    color:#8993a7;
+    margin-bottom:20px;
+}
+
+.card{
+    padding:20px;
+    margin-bottom:15px;
+    background:#0d1220;
+    border:1px solid #20283a;
+    border-radius:18px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:20px;
+    background:#0d1220;
+    border:1px solid #20283a;
+    border-radius:18px;
+}
+
+.number{
+    font-size:28px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.muted{
+    color:#8993a7;
+}
+
+.member{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px;
+    margin-bottom:10px;
+    background:#0d1220;
+    border:1px solid #20283a;
+    border-radius:14px;
+}
+
+.member-avatar{
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:13px;
+    background:#1a2131;
+    font-weight:bold;
+}
+
+.member-info{
+    flex:1;
+}
+
+.nickname{
+    margin-top:4px;
+    color:#00d9ff;
+    font-size:13px;
+}
+
+.badge{
+    padding:6px 9px;
+    border-radius:8px;
+    background:#192031;
+    font-size:11px;
+}
+
+.owner{
+    background:#39277a;
+}
+
+.admin{
+    background:#12445a;
+}
+
+.profile{
+    max-width:500px;
+    margin:auto;
+    text-align:center;
+}
+
+.big-avatar{
+    width:100px;
+    height:100px;
+    margin:0 auto 15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:28px;
+    font-size:40px;
+    font-weight:bold;
+    background:linear-gradient(135deg,#7657ff,#00d9ff);
+}
+
+.profile-name{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.profile-nick{
+    color:#00d9ff;
+    margin:8px 0 15px;
+}
+
+.admin-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 130px 80px;
+    gap:8px;
+    align-items:center;
+    padding:13px;
+    margin-bottom:10px;
+    background:#0a0f19;
+    border:1px solid #20283a;
+    border-radius:13px;
+}
+
+.save{
+    padding:10px;
+    color:white;
+    background:#7657ff;
+    border:0;
+    border-radius:9px;
+}
+
+.theme{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.theme button{
+    padding:10px 14px;
+    color:white;
+    background:#171e2e;
+    border:1px solid #293247;
+    border-radius:9px;
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+    header{
+        padding:0 12px;
+    }
+
+    .logout{
+        display:none;
+    }
+
+    .container{
+        grid-template-columns:1fr;
+        padding:13px;
+    }
+
+    .sidebar{
+        display:flex;
+        overflow-x:auto;
+        gap:5px;
+    }
+
+    .nav{
+        min-width:max-content;
+        margin:0;
+        text-align:center;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .admin-row{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div id="login">
+
+    <div class="login-box">
+
+        <div class="logo">W</div>
+
+        <h1>Wick-Guard</h1>
+
+        <div class="subtitle">
+            به Wick-Guard خوش آمدید
+        </div>
+
+        <label for="name">اسمت رو وارد کن</label>
+
+        <input
+            id="name"
+            type="text"
+            maxlength="20"
+            autocomplete="off"
+            placeholder="مثلاً Arsham"
+        >
+
+        <button
+            class="login-button"
+            id="loginButton"
+            type="button"
+        >
+            ورود به Wick-Guard
+        </button>
+
+        <div class="error" id="error"></div>
+
+    </div>
+
+</div>
+
+
+<!-- APP -->
+
+<div id="app">
+
+<header>
+
+    <div class="brand">
+        <div class="small-logo">W</div>
+        Wick-Guard
+    </div>
+
+    <div class="user-area">
+
+        <div class="avatar" id="headerAvatar">?</div>
+
+        <span id="headerName">کاربر</span>
+
+        <button class="logout" id="logout">
+            خروج
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <aside class="sidebar">
+
+        <button class="nav active" data-page="home">
+            🏠 داشبورد
+        </button>
+
+        <button class="nav" data-page="members">
+            👥 اعضا
+        </button>
+
+        <button class="nav" data-page="profile">
+            👤 پروفایل
+        </button>
+
+        <button class="nav" data-page="rules">
+            📜 قوانین
+        </button>
+
+        <button class="nav" data-page="security">
+            🔐 امنیت
+        </button>
+
+        <button class="nav" data-page="settings">
+            ⚙️ تنظیمات
+        </button>
+
+        <button class="nav" id="adminButton" data-page="admin">
+            👑 مدیریت
+        </button>
+
+    </aside>
+
+
+    <main>
+
+        <!-- HOME -->
+
+        <section class="page active" id="home">
+
+            <div class="card">
+
+                <h1 class="title">
+                    خوش اومدی <span id="welcome"></span> 👋
+                </h1>
+
+                <p class="desc">
+                    به شبکه Wick-Guard خوش آمدی.
+                </p>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <div class="muted">
+                        اعضا
+                    </div>
+
+                    <div class="number" id="count">
+                        0
+                    </div>
+                </div>
+
+                <div class="stat">
+                    <div class="muted">
+                        وضعیت
+                    </div>
+
+                    <div class="number" style="color:#35e39a">
+                        فعال
+                    </div>
+                </div>
+
+                <div class="stat">
+                    <div class="muted">
+                        نسخه
+                    </div>
+
+                    <div class="number">
+                        1.0
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MEMBERS -->
+
+        <section class="page" id="members">
+
+            <h1 class="title">
+                👥 اعضای Wick-Guard
+            </h1>
+
+            <p class="desc">
+                اعضای ثبت‌شده روی این مرورگر
+            </p>
+
+            <div id="memberList"></div>
+
+        </section>
+
+
+        <!-- PROFILE -->
+
+        <section class="page" id="profile">
+
+            <h1 class="title">
+                👤 پروفایل من
+            </h1>
+
+            <p class="desc">
+                اطلاعات حساب
+            </p>
+
+            <div class="card profile">
+
+                <div class="big-avatar" id="bigAvatar">
+                    ?
+                </div>
+
+                <div class="profile-name" id="profileName">
+                    کاربر
+                </div>
+
+                <div class="profile-nick" id="profileNick">
+                    بدون نیک‌نیم
+                </div>
+
+                <span class="badge" id="profileRole">
+                    Member
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- RULES -->
+
+        <section class="page" id="rules">
+
+            <h1 class="title">
+                📜 قوانین Wick-Guard
+            </h1>
+
+            <p class="desc">
+                قوانین گروه
+            </p>
+
+            <div class="card">
+
+                <p>۱. احترام به همه اعضا الزامی است.</p>
+                <br>
+                <p>۲. ایجاد مزاحمت برای دیگران ممنوع است.</p>
+                <br>
+                <p>۳. جعل هویت اعضای دیگر ممنوع است.</p>
+                <br>
+                <p>۴. تصمیم مدیر در مدیریت گروه نهایی است.</p>
+                <br>
+                <p>۵. محیط Wick-Guard باید دوستانه باقی بماند.</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SECURITY -->
+
+        <section class="page" id="security">
+
+            <h1 class="title">
+                🔐 امنیت
+            </h1>
+
+            <p class="desc">
+                وضعیت امنیتی سایت
+            </p>
+
+            <div class="card">
+
+                <h3 style="margin-bottom:12px">
+                    وضعیت سیستم
+                </h3>
+
+                <p style="color:#35e39a;margin-bottom:12px">
+                    ● فعال
+                </p>
+
+                <p class="muted">
+                    این سایت دیتابیس آنلاین ندارد.
+                    اطلاعات فقط در مرورگر دستگاه ذخیره می‌شود.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SETTINGS -->
+
+        <section class="page" id="settings">
+
+            <h1 class="title">
+                ⚙️ تنظیمات
+            </h1>
+
+            <p class="desc">
+                ظاهر سایت
+            </p>
+
+            <div class="card">
+
+                <h3 style="margin-bottom:15px">
+                    انتخاب تم
+                </h3>
+
+                <div class="theme">
+
+                    <button id="purple">
+                        🟣 بنفش
+                    </button>
+
+                    <button id="blue">
+                        🔵 آبی
+                    </button>
+
+                    <button id="red">
+                        🔴 قرمز
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADMIN -->
+
+        <section class="page" id="admin">
+
+            <h1 class="title">
+                👑 پنل مدیریت
+            </h1>
+
+            <p class="desc">
+                تغییر نیک‌نیم و رتبه اعضا
+            </p>
+
+            <div class="card" id="adminList"></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   تنظیمات مدیر
+   اسم خودت را اینجا بنویس
+========================================== */
+
+const ADMIN_NAME = "MoR7gAn";
+
+
+/* ==========================================
+   اطلاعات
+========================================== */
+
+let members = [];
+
+try{
+    members =
+        JSON.parse(
+            localStorage.getItem("wickguard_members")
+        ) || [];
+}catch(e){
+    members = [];
+}
+
+let currentUser =
+    localStorage.getItem("wickguard_current_user") || "";
+
+
+/* ==========================================
+   عناصر
+========================================== */
+
+const login = document.getElementById("login");
+const app = document.getElementById("app");
+
+const nameInput =
+    document.getElementById("name");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const errorBox =
+    document.getElementById("error");
+
+
+/* ==========================================
+   ابزار
+========================================== */
+
+function save(){
+
+    localStorage.setItem(
+        "wickguard_members",
+        JSON.stringify(members)
+    );
+}
+
+function findMember(name){
+
+    return members.find(
+        member =>
+        member.name.toLowerCase() ===
+        name.toLowerCase()
+    );
+}
+
+function firstLetter(name){
+
+    return name
+        ? name.charAt(0).toUpperCase()
+        : "?";
+}
+
+function safe(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+/* ==========================================
+   ورود
+========================================== */
+
+function doLogin(){
+
+    const name =
+        nameInput.value.trim();
+
+    if(name.length < 2){
+
+        errorBox.textContent =
+            "لطفاً حداقل ۲ حرف وارد کن.";
+
+        return;
+    }
+
+    errorBox.textContent = "";
+
+    let member = findMember(name);
+
+    if(!member){
+
+        member = {
+
+            name:name,
+
+            nickname:"",
+
+            role:
+                name.toLowerCase() ===
+                ADMIN_NAME.toLowerCase()
+                ? "Owner"
+                : "Member"
+        };
+
+        members.push(member);
+
+        save();
+    }
+
+    currentUser = member.name;
+
+    localStorage.setItem(
+        "wickguard_current_user",
+        currentUser
+    );
+
+    openApp();
+}
+
+
+/* ==========================================
+   دکمه ورود
+========================================== */
+
+loginButton.addEventListener(
+    "click",
+    doLogin
+);
+
+nameInput.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Enter"){
+            doLogin();
+        }
+
+    }
+);
+
+
+/* ==========================================
+   باز کردن سایت
+========================================== */
+
+function openApp(){
+
+    const member =
+        findMember(currentUser);
+
+    if(!member){
+        return;
+    }
+
+    login.style.display = "none";
+    app.style.display = "block";
+
+    document.getElementById(
+        "headerName"
+    ).textContent = member.name;
+
+    document.getElementById(
+        "headerAvatar"
+    ).textContent = firstLetter(member.name);
+
+    document.getElementById(
+        "welcome"
+    ).textContent = member.name;
+
+    document.getElementById(
+        "bigAvatar"
+    ).textContent = firstLetter(member.name);
+
+    document.getElementById(
+        "profileName"
+    ).textContent = member.name;
+
+    document.getElementById(
+        "profileNick"
+    ).textContent =
+        member.nickname
+        ? "@" + member.nickname
+        : "بدون نیک‌نیم";
+
+    document.getElementById(
+        "profileRole"
+    ).textContent = member.role;
+
+    document.getElementById(
+        "count"
+    ).textContent = members.length;
+
+    document.getElementById(
+        "adminButton"
+    ).style.display =
+        member.role === "Owner"
+        ? "block"
+        : "none";
+
+    renderMembers();
+    renderAdmin();
+}
+
+
+/* ==========================================
+   خروج
+========================================== */
+
+document.getElementById(
+    "logout"
+).addEventListener(
+    "click",
+    function(){
+
+        currentUser = "";
+
+        localStorage.removeItem(
+            "wickguard_current_user"
+        );
+
+        app.style.display = "none";
+        login.style.display = "flex";
+
+        nameInput.value = "";
+        errorBox.textContent = "";
+    }
+);
+
+
+/* ==========================================
+   منو
+========================================== */
+
+document.querySelectorAll(".nav")
+.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        function(){
+
+            const page =
+                this.dataset.page;
+
+            const member =
+                findMember(currentUser);
+
+            if(
+                page === "admin" &&
+                (!member ||
+                 member.role !== "Owner")
+            ){
+                return;
+            }
+
+            document.querySelectorAll(".nav")
+            .forEach(x =>
+                x.classList.remove("active")
+            );
+
+            this.classList.add("active");
+
+            document.querySelectorAll(".page")
+            .forEach(x =>
+                x.classList.remove("active")
+            );
+
+            const target =
+                document.getElementById(page);
+
+            if(target){
+                target.classList.add("active");
+            }
+        }
+    );
+
+});
+
+
+/* ==========================================
+   اعضا
+========================================== */
+
+function renderMembers(){
+
+    const list =
+        document.getElementById("memberList");
+
+    list.innerHTML = "";
+
+    members.forEach(member => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "member";
+
+        div.innerHTML = `
+
+            <div class="member-avatar">
+                ${safe(firstLetter(member.name))}
+            </div>
+
+            <div class="member-info">
+
+                <b>
+                    ${safe(member.name)}
+                </b>
+
+                <div class="nickname">
+                    ${
+                        member.nickname
+                        ? "@" + safe(member.nickname)
+                        : "بدون نیک‌نیم"
+                    }
+                </div>
+
+            </div>
+
+            <span class="badge ${
+                member.role === "Owner"
+                ? "owner"
+                : member.role === "Admin"
+                ? "admin"
+                : ""
+            }">
+                ${safe(member.role)}
+            </span>
+        `;
+
+        list.appendChild(div);
+    });
+}
+
+
+/* ==========================================
+   پنل مدیر
+========================================== */
+
+function renderAdmin(){
+
+    const list =
+        document.getElementById("adminList");
+
+    list.innerHTML = "";
+
+    const me =
+        findMember(currentUser);
+
+    if(!me || me.role !== "Owner"){
+        return;
+    }
+
+    members.forEach(
+        (member,index) => {
+
+            const row =
+                document.createElement("div");
+
+            row.className = "admin-row";
+
+            row.innerHTML = `
+
+                <div>
+                    <b>
+                        ${safe(member.name)}
+                    </b>
+
+                    <div class="muted">
+                        ${safe(member.role)}
+                    </div>
+            
